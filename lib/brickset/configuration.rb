@@ -7,7 +7,7 @@ module Brickset
     DEFAULT_ENDPOINT    = 'http://brickset.com/api/v2.asmx'
     DEFAULT_METHOD      = :get
     DEFAULT_USER_AGENT  = "Brickset API Ruby Gem #{Brickset::VERSION}".freeze
-    DEFAULT_API_KEY     = "TuKn-uq37-Ppq2"
+    DEFAULT_API_KEY     = ENV['BRICKSET_API_KEY']
  
     # Build accessor methods for every config options so we can do this, for example:
     #   Awesome.method = :get
