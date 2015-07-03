@@ -24,11 +24,20 @@ module Brickset
       default_options = {}
       required_params.each { |param| default_options[param] = nil }
       response = call_api(:getSets, default_options.merge(options))
-      response["ArrayOfSets"]["sets"] unless response["ArrayOfSets"].nil?
+      if response["ArrayOfSets"].nil?
+        []
+      else
+        response["ArrayOfSets"]["sets"] 
+      end
     end
 
     def get_recently_updated_sets minutes_ago
-      call_api :getRecentlyUpdatedSets, {minutesAgo: minutes_ago}
+      response = call_api :getRecentlyUpdatedSets, {minutesAgo: minutes_ago}
+      if response["ArrayOfSets"].nil?
+        []
+      else
+        response["ArrayOfSets"]["sets"] 
+      end
     end
 
     protected
