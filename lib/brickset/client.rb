@@ -24,7 +24,7 @@ module Brickset
       default_options = {}
       required_params.each { |param| default_options[param] = nil }
       response = call_api(:getSets, default_options.merge(options))
-      response["ArrayOfSets"]["sets"]
+      response["ArrayOfSets"]["sets"] unless response["ArrayOfSets"].nil?
     end
 
     def get_recently_updated_sets minutes_ago
@@ -35,7 +35,11 @@ module Brickset
 
     def call_api method, options = {}
       response = self.class.get("#{endpoint}/#{method.to_s}", query: options.merge(apiKey: api_key))
-      response.parsed_response
+      if response.code == 200
+        response.parsed_response
+      else
+        raise response.body
+      end
     end
   end
 end
