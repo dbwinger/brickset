@@ -1,4 +1,3 @@
-require 'byebug'
 require "brickset/version"
 require "brickset/configuration"
 require "brickset/client"
