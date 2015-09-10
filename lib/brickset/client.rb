@@ -19,7 +19,7 @@ module Brickset
       end
     end
 
-    def get_sets options
+    def get_sets options = {}
       required_params = [:userHash, :query, :theme, :subtheme, :setNumber, :year, :owned, :wanted, :orderBy, :pageSize, :pageNumber, :userName]
       default_options = {}
       required_params.each { |param| default_options[param] = nil }
@@ -32,7 +32,7 @@ module Brickset
     end
 
     def get_recently_updated_sets minutes_ago
-      response = call_api :getRecentlyUpdatedSets, {minutesAgo: minutes_ago}
+      response = call_api :getRecentlyUpdatedSets, { minutesAgo: minutes_ago }
       if response["ArrayOfSets"].nil?
         []
       else
